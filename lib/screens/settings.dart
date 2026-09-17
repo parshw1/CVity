@@ -1,3 +1,4 @@
+import 'package:cvity/screens/Login.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -105,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SizedBox(height: 60),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),
