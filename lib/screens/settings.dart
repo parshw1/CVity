@@ -9,8 +9,11 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
   @override
   Widget build(BuildContext context) {
+    final Screenwidth = MediaQuery.of(context).size.width;
+    final Screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings',
@@ -85,6 +88,41 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ); 
                 },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete_outline),
+                title: Text('Delete Account'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Build in progress!'),
+                      duration: Duration(seconds: 1),
+                    ),
+                  ); 
+                },
+              ),
+              SizedBox(height: 60),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),
+                  maximumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),
+                  backgroundColor: Colors.deepPurple,
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  'Logout',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
