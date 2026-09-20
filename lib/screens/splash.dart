@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cvity/screens/Login.dart';
+import 'package:cvity/screens/signUpPage.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<Splash> {
     Timer(const Duration(seconds: 3), () {
       Navigator.of(
         context,
-      ).pushReplacement(MaterialPageRoute(builder: (context) => const Login()));
+      ).pushReplacement(MaterialPageRoute(builder: (context) => const SignUpPage()));
     });
   }
 

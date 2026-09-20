@@ -1,8 +1,20 @@
 import 'package:cvity/widgets/navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cvity/screens/Login.dart';
+import 'package:cvity/auth/firebase_auth_methods.dart';
+import 'package:provider/provider.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +94,7 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     hintText: 'Enter Email',
                     hintStyle: TextStyle(color: Color(0xFFC6C6C6)),
@@ -118,6 +131,7 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 child: TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     hintText: 'Enter Password',
                     hintStyle: TextStyle(color: Color(0xFFC6C6C6)),
@@ -136,11 +150,46 @@ class SignUpPage extends StatelessWidget {
                   obscureText: true,
                 ),
               ),
-              
-              SizedBox(height: 50),
+               SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 40),
+                  Text(
+                    "Already have an Account?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                      );
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 219, 113, 0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Navigation()));
+                onPressed: () async {
+                  await context.read<FirebaseAuthMethods>().signUp(
+                    email: emailController.text,
+                    password: passwordController.text,
+                    context: context,
+                  );
+                  if (context.read<FirebaseAuthMethods>().currentUser != null) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Navigation()),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),

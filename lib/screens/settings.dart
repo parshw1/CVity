@@ -1,5 +1,9 @@
 import 'package:cvity/screens/Login.dart';
+import 'package:cvity/screens/resetPassword.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cvity/auth/firebase_auth_methods.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   
@@ -68,13 +72,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: Icon(Icons.lock_outline),
                 title: Text('Reset Password'),
                 trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Build in progress!'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  ); 
+                onTap: ()  {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Resetpassword()),
+                  );
                 },
               ),
               ListTile(
@@ -94,19 +96,14 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: Icon(Icons.delete_outline),
                 title: Text('Delete Account'),
                 trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Build in progress!'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  ); 
+                onTap: () async {
+                  await context.read<FirebaseAuthMethods>().deleteAccount(context: context);
                 },
               ),
               SizedBox(height: 60),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                onPressed: () async {
+                  await context.read<FirebaseAuthMethods>().logout();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cvity/widgets/file_picker.dart';
+import 'package:cvity/widgets/pickPdf.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,10 +16,7 @@ class _HomeState extends State<Home> {
   final Screenheight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 183, 144, 250),
-        
-      ),
+     
       body: Center(
         child: isResumeUploaded ? 
         
@@ -35,32 +32,16 @@ class _HomeState extends State<Home> {
           children: [
             Text(
               'Please upload your resume.',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
             ),
-            SizedBox(height: 20,),
-            ElevatedButton(
-                onPressed: () {
-                  pickPdf(); 
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),
-                  maximumSize: Size(Screenwidth * 0.8, Screenheight * 0.06),
-                  backgroundColor: Colors.deepPurple,
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Text(
-                  'Upload Resume',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pickPdf();
+        },
+        child: Icon(Icons.upload_file),
       ),
     );
   }
