@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
+import '../screens/history.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -14,6 +15,7 @@ class _NavigationState extends State<Navigation> {
 
   final pages = [
     Home(),
+    ResumeHistory(),
     SettingsPage(),
   ];
 
@@ -37,6 +39,12 @@ class _NavigationState extends State<Navigation> {
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
             label: 'Home',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.history_outlined),
+            selectedIcon: Icon(Icons.history),
+            label: 'History',
           ),
 
           NavigationDestination(

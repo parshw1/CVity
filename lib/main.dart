@@ -1,4 +1,5 @@
 import "package:cvity/screens/splash.dart";
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:cvity/widgets/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cvity/auth/firebase_auth_methods.dart';
@@ -9,7 +10,8 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
+  await dotenv.load(); 
+  await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
 runApp(const MyApp());
