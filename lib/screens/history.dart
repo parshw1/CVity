@@ -1,4 +1,5 @@
 import 'package:cvity/models/resumeAnalysis.dart';
+import 'package:cvity/screens/resume_details.dart';
 import 'package:flutter/material.dart';
 import 'package:cvity/services/firestore_service.dart';
 
@@ -61,6 +62,14 @@ class _ResumeHistoryState extends State<ResumeHistory> {
                     title: Text('Resume ${index + 1}'),
                     subtitle: Text('Score: ${resume.score}/100'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResumeDetails(analysis: resume),
+                        ),
+                      );
+                    },
                   ),
                 );
               },

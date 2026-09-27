@@ -40,7 +40,26 @@ class FirestoreService {
       .get();
 
   return snapshot.docs.map((doc) {
-    return ResumeAnalysis.fromJson(doc.data());
-  }).toList();
-}
-}
+  return ResumeAnalysis(
+    id: doc.id,
+    score: doc.data()['score'] ?? 0,
+    summary: doc.data()['summary'] ?? '',
+    technicalSkills:
+        List<String>.from(doc.data()['technicalSkills'] ?? []),
+    softSkills:
+        List<String>.from(doc.data()['softSkills'] ?? []),
+    strengths:
+        List<String>.from(doc.data()['strengths'] ?? []),
+    weaknesses:
+        List<String>.from(doc.data()['weaknesses'] ?? []),
+    recommendedSkills:
+        List<String>.from(doc.data()['recommendedSkills'] ?? []),
+    atsCompatibility:
+        doc.data()['atsCompatibility'] ?? '',
+    improvements:
+        List<String>.from(doc.data()['improvements'] ?? []),
+    jobRoles:
+        List<String>.from(doc.data()['jobRoles'] ?? []),
+  );
+}).toList();
+}}

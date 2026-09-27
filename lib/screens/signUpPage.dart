@@ -1,5 +1,4 @@
 import 'package:cvity/widgets/navigation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cvity/screens/Login.dart';
 import 'package:cvity/auth/firebase_auth_methods.dart';

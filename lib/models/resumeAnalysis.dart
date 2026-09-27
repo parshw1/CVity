@@ -1,4 +1,5 @@
 class ResumeAnalysis {
+  final String? id;
   final int score;
   final String summary;
   final List<String> technicalSkills;
@@ -11,6 +12,7 @@ class ResumeAnalysis {
   final List<String> jobRoles;
 
   ResumeAnalysis({
+    this.id,
     required this.score,
     required this.summary,
     required this.technicalSkills,

@@ -36,6 +36,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "CVity",
         home: const AuthWrapper(),
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
       ),
     );
   }

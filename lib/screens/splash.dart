@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cvity/screens/Login.dart';
 import 'package:cvity/screens/signUpPage.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +15,16 @@ class _SplashScreenState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(
+      Navigator.pushReplacement(
         context,
-      ).pushReplacement(MaterialPageRoute(builder: (context) => const SignUpPage()));
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 1200),
+          reverseTransitionDuration: const Duration(milliseconds: 1200),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return const SignUpPage();
+          },
+        ),
+      );
     });
   }
 
@@ -34,30 +40,18 @@ class _SplashScreenState extends State<Splash> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.black, const Color.fromARGB(255, 183, 144, 250)],
-            ),
-          ),
+          decoration: BoxDecoration(color: Colors.black),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.account_box_outlined,
-                  color: Colors.white,
-                  size: 90,
-                ),
-                const SizedBox(height: 20),
                 const Text(
                   'CVity',
                   style: TextStyle(
                     fontFamily: "ChangaOne",
                     fontSize: 35,
                     fontWeight: FontWeight.w400,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 183, 144, 250),
                     shadows: [Shadow(color: Colors.white, blurRadius: 200)],
                   ),
                 ),

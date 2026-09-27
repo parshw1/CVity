@@ -1,8 +1,10 @@
-import 'package:cvity/screens/Login.dart';
-import 'package:cvity/screens/resetPassword.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cvity/auth_pages/delete_account.dart';
 import 'package:flutter/material.dart';
+import 'package:cvity/auth_pages/change_username.dart';
+import 'package:cvity/auth_pages/resetPassword.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cvity/auth/firebase_auth_methods.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -14,6 +16,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final String username = FirebaseAuth.instance.currentUser?.displayName ?? 'User';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         centerTitle: true,
       ),
-
+    
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -44,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               SizedBox(height: 20),
               Text(
-                '[username]',
+                FirebaseAuth.instance.currentUser?.displayName ?? 'User',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -52,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               SizedBox(height: 8),
               Text(
-                '[email]',
+                FirebaseAuth.instance.currentUser?.email ?? '[email]',
               ),
               SizedBox(height: 30),
               ListTile(
@@ -60,12 +63,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: Text('Change Username'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Build in progress!'),
-                      duration: Duration(seconds: 1),
-                    ),
-                  ); 
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChangeUsernameScreen()),
+                  );
                 },
               ),
               ListTile(
@@ -85,19 +86,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 trailing: Icon(Icons.arrow_forward_ios),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Build in progress!'),
-                      duration: Duration(seconds: 1),
+                    SnackBar(
+                      content: Text('Build in progress'),
+                      duration: Duration(seconds: 2),
                     ),
-                  ); 
+                  );
                 },
               ),
               ListTile(
                 leading: Icon(Icons.delete_outline),
                 title: Text('Delete Account'),
                 trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () async {
-                  await context.read<FirebaseAuthMethods>().deleteAccount(context: context);
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DeleteAccountScreen()),
+                  );
                 },
               ),
               SizedBox(height: 60),
