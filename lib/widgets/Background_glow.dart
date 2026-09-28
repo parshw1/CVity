@@ -106,8 +106,7 @@ class _GlowPainter extends CustomPainter {
       ).createShader(Rect.fromCircle(center: position, radius: 100));
 
     canvas.drawCircle(position, 100, glowPaint);
-
-    // Small bright center
+    
     final Paint centerPaint = Paint()
       ..color = glowColor.withOpacity(0.9)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
